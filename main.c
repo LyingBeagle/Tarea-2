@@ -228,6 +228,8 @@ void mostrarDatosPuntoInteres(HashMap *mapaPuntosInteres) {
 
 //Opcion 3, elimina el punto de interes pedido por el usuario
 void eliminarPuntoInteres(HashMap *mapaPuntosInteres, HashMap *mapaPuntosInteresTipo) {
+
+    //Se busca al elemento
     char nombreEliminar[100];
     printf("\n-----------------------\n");
     printf("\nIngrese el nombre del lugar a eliminar\n");
@@ -236,6 +238,7 @@ void eliminarPuntoInteres(HashMap *mapaPuntosInteres, HashMap *mapaPuntosInteres
     // Buscar el punto de interés en el mapa
     Pair *puntoEliminar = searchMap(mapaPuntosInteres, nombreEliminar);
 
+    //Si no exite se manda un mensaje y se retorna
     if (puntoEliminar == NULL || puntoEliminar->value == NULL) {
         printf("\nNo existe el lugar pedido\n");
         return;
@@ -256,7 +259,8 @@ void eliminarPuntoInteres(HashMap *mapaPuntosInteres, HashMap *mapaPuntosInteres
           
             if(current == firstInList){
                 popFront(listaPuntoInteres);
-                insertMap(mapaPuntosInteresTipo, puntoInteres->tipo, listaPuntoInteres);
+                char* nombreTipo = strdup(puntoInteres->tipo);
+                insertMap(mapaPuntosInteresTipo, nombreTipo, listaPuntoInteres);
             }
             else{
                 popCurrent(listaPuntoInteres);
@@ -265,6 +269,7 @@ void eliminarPuntoInteres(HashMap *mapaPuntosInteres, HashMap *mapaPuntosInteres
 
             eraseMap(mapaPuntosInteres, nombreEliminar);
 
+            //Se libera su memoria
             free(puntoInteres->nombre);
             free(puntoInteres->tipo);
             free(puntoInteres->direccion);
