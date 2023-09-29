@@ -144,9 +144,9 @@ void registrarPuntoInteresTipo(HashMap *mapaPuntosInteresTipo,
 
     //Se inserta al principio
     pushFront(listaTipo, puntoInteres);
-
+    char* nombreTipo = strdup(puntoInteres->tipo);
     //Se inserta la lista al mapa con clave el tipo
-    insertMap(mapaPuntosInteresTipo, puntoInteres->tipo, listaTipo);
+    insertMap(mapaPuntosInteresTipo, nombreTipo, listaTipo);
   } else {
     //Si existe, se extrae la lista
     List *listaTipo = (List *)pairTipo->value;
@@ -251,22 +251,12 @@ void eliminarPuntoInteres(HashMap *mapaPuntosInteres, HashMap *mapaPuntosInteres
 
     // Buscar y eliminar el punto de interés en la lista
     Node *current = firstList(listaPuntoInteres);
-    Node *firstInList = firstList(listaPuntoInteres);
 
     while (current != NULL) {
       
         if (strcmp((char *)current->data, nombreEliminar) == 0) {
           
-            if(current == firstInList){
-                popFront(listaPuntoInteres);
-                char* nombreTipo = strdup(puntoInteres->tipo);
-                insertMap(mapaPuntosInteresTipo, nombreTipo, listaPuntoInteres);
-            }
-            else{
-                popCurrent(listaPuntoInteres);
-            }
-
-
+            popCurrent(listaPuntoInteres);
             eraseMap(mapaPuntosInteres, nombreEliminar);
 
             //Se libera su memoria
@@ -799,7 +789,7 @@ void exportarTuristas(HashMap *mapaTuristas) {
   fclose(archivo);
 }
 
-//Funcion para liberar memoria de los mapas
+// Función para liberar memoria de los mapas
 void freeMap(HashMap *map) {
   if (map == NULL)
     return;
@@ -822,10 +812,18 @@ void freeMap(HashMap *map) {
       free(turista->pasaporte);
       free(turista->nombre);
       free(turista->pais);
-      cleanList(turista->lugaresFavoritos); // También liberamos la memoria de la lista
+
+      // Liberar la memoria de los lugares favoritos y la lista
+      Node *current = firstList(turista->lugaresFavoritos);
+      while (current != NULL) {
+        free(current->data); // Liberar cada elemento
+        current = nextList(turista->lugaresFavoritos);
+      }
+      cleanList(turista->lugaresFavoritos);
+
       free(turista);
     }
     pair = nextMap(map);
   }
-  free(map);
+  freeMap(map);
 }
