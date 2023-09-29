@@ -814,8 +814,13 @@ void freeMap(HashMap *map) {
 
   Pair *pair = firstMap(map);
   while (pair != NULL) {
-    // Si el valor es un PuntoInteres, liberamos su memoria
+    Pair *nextPair = nextMap(map); // Obtener el siguiente par antes de liberar el actual
+
+    // Liberar la memoria del valor y la clave
+    free(pair->key);
+
     if (pair->value != NULL) {
+      // Si el valor es un PuntoInteres, liberamos su memoria
       PuntoInteres *puntoInteres = (PuntoInteres *)pair->value;
       free(puntoInteres->nombre);
       free(puntoInteres->tipo);
@@ -823,25 +828,24 @@ void freeMap(HashMap *map) {
       free(puntoInteres->horario);
       free(puntoInteres->descripcion);
       free(puntoInteres);
-    }
-    // Si el valor es un Turista, liberamos su memoria
-    else if (pair->value != NULL) {
+    } else if (pair->value != NULL) {
+      // Si el valor es un Turista, liberamos su memoria
       Turista *turista = (Turista *)pair->value;
       free(turista->pasaporte);
       free(turista->nombre);
       free(turista->pais);
 
-      // Liberar la memoria de los lugares favoritos y la lista
+      // Liberar la memoria de los lugares favoritos y destruir la lista
       Node *current = firstList(turista->lugaresFavoritos);
       while (current != NULL) {
         free(current->data); // Liberar cada elemento
         current = nextList(turista->lugaresFavoritos);
       }
-      cleanList(turista->lugaresFavoritos);
+      cleanList(turista->lugaresFavoritos); // Destruir la lista
 
       free(turista);
     }
-    pair = nextMap(map);
+
+    pair = nextPair; // Avanzar al siguiente par
   }
-  freeMap(map);
 }
