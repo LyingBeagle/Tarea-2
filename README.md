@@ -48,7 +48,3 @@ Se permite registrar puntos de interés turísticos, mostrar sus datos, eliminar
 * El proceso que se realiza al elegir una opciones
 * Pedida de datos de turistas y puntos de interés
 * Liberacion de memoria
-
-## Errorres Conocidos
-
-* Cuando se borra el **primer** punto de interes de su lista de tipos, las lista completa se desenlaza del mapa, todos los valores siguen en el mapa original
