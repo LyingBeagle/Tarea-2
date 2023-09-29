@@ -129,6 +129,8 @@ void registrarPuntoInteres(HashMap *mapaPuntosInteres,
 
   //Se inserta al mapa con los puntos de interes por tipo
   registrarPuntoInteresTipo(mapaPuntosInteresTipo, puntoInteres);
+
+  printf("\nSe registro correctamente\n");
 }
 
 //Funcion para regisrar el punto al mapa de puntos de interes por tipo
@@ -272,6 +274,7 @@ void eliminarPuntoInteres(HashMap *mapaPuntosInteres, HashMap *mapaPuntosInteres
 
         current = nextList(listaPuntoInteres);
     }
+  printf("\nSe elimino correctamente\n");
 }
 
 //Opcion 4, se registra a un turista
@@ -288,6 +291,8 @@ void registrarTurista(HashMap *mapaTurista, HashMap *mapaTuristaPais) {
 
   //Se registra al turista al mapa por pais
   registrarTuristaPorPais(mapaTuristaPais, turista);
+
+  printf("\nSe agrego correctamente\n");
 }
 
 //Funcion donde se añaden los datos al turista
@@ -363,6 +368,8 @@ void agregarLugarFavoritoTurista(HashMap *mapaTurista) {
 
   char *lugarFavorito = strdup(nombreLugarFavorito);
   pushFront(turista->lugaresFavoritos, lugarFavorito);
+
+  printf("\nSe agrego correctamente\n");
 }
 
 //Opcion 6, se muestran a todos los turistas de un pais
@@ -574,7 +581,7 @@ void importarPuntosInteres(HashMap *mapaPuntosInteres,
     //Se insertal mapa por tipo
     registrarPuntoInteresTipo(mapaPuntosInteresTipo, puntoInteres);
   }
-
+  printf("\nSe importo correctamente\n");
   fclose(archivo);
 }
 
@@ -664,7 +671,7 @@ void importarTuristas(HashMap *mapaTuristas, HashMap *mapaTuristasPais) {
     //Se inserta al mapa de pais
     registrarTuristaPorPais(mapaTuristasPais, turista);
   }
-
+  printf("\nSe importo correctamente\n");
   fclose(archivo);
 }
 
@@ -681,7 +688,12 @@ void exportarCSV(HashMap *mapaPuntosInteres, HashMap *mapaTuristas) {
 
   if(opcion){
       //Revisa si hay datos en el mapa
-      if (firstMap(mapaPuntosInteres) != NULL) exportarPuntosInteres(mapaPuntosInteres);
+      if (firstMap(mapaPuntosInteres) != NULL){
+        exportarPuntosInteres(mapaPuntosInteres);
+      }
+    else{
+      printf("\nNo tiene datos de puntos de interes\n");
+    }
   }
   
   opcion = 0;
@@ -692,7 +704,12 @@ void exportarCSV(HashMap *mapaPuntosInteres, HashMap *mapaTuristas) {
 
   if(opcion){
     //Se revisa su hay datos en el mapa
-    if (firstMap(mapaTuristas) != NULL)  exportarTuristas(mapaTuristas);
+    if (firstMap(mapaTuristas) != NULL){
+      exportarTuristas(mapaTuristas);
+    }
+    else{
+      printf("\nNo tiene datos de turistas\n");
+    }
   }
 }
 
@@ -734,6 +751,7 @@ void exportarPuntosInteres(HashMap *mapaPuntosInteres) {
     current = nextMap(mapaPuntosInteres);
   }
 
+  printf("\nSe exporto correctamente\n");
   fclose(archivo);
 }
 
@@ -785,7 +803,7 @@ void exportarTuristas(HashMap *mapaTuristas) {
 
     current = nextMap(mapaTuristas);
   }
-
+  printf("\nSe exporto correctamente\n");
   fclose(archivo);
 }
 
