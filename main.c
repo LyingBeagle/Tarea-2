@@ -466,7 +466,7 @@ void importarCSV(HashMap *mapaPuntosInteres, HashMap *mapaTuristas,
   
   int opcion = 0;
 
-  printf("\nQuieres importar datos de puntos de interes?\n");
+  printf("\nQuiere importar datos de puntos de interes?\n");
   printf("Opcion ( 1 = Si, 0 = No )\n");
   scanf(" %d", &opcion);
 
@@ -476,7 +476,7 @@ void importarCSV(HashMap *mapaPuntosInteres, HashMap *mapaTuristas,
 
   opcion = 0;
   
-  printf("\nQuieres importar datos de turista?\n");
+  printf("\nQuiere importar datos de turista?\n");
   printf("Opcion ( 1 = Si, 0 = No )\n");
   scanf(" %d", &opcion);
 
@@ -675,7 +675,7 @@ void exportarCSV(HashMap *mapaPuntosInteres, HashMap *mapaTuristas) {
   
   int opcion = 0;
 
-  printf("\nQuieres exportar datos de puntos de interes?\n");
+  printf("\nQuiere exportar datos de puntos de interes?\n");
   printf("Opcion ( 1 = Si, 0 = No )\n");
   scanf(" %d", &opcion);
 
@@ -686,7 +686,7 @@ void exportarCSV(HashMap *mapaPuntosInteres, HashMap *mapaTuristas) {
   
   opcion = 0;
 
-  printf("\nQuieres exportar datos de turista?\n");
+  printf("\nQuiere exportar datos de turista?\n");
   printf("Opcion ( 1 = Si, 0 = No )\n");
   scanf(" %d", &opcion);
 
